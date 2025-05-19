@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'xchangeua@gmail.com'
-EMAIL_HOST_PASSWORD = 'vler iilr fejg sxfo'
+EMAIL_HOST_PASSWORD = 'XXX'
 EMAIL_USE_TLS = True
 
 class RegistrationFacade:
