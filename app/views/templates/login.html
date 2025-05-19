@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Вхід</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 36px 28px 28px 28px;
+        }
+        h2 {
+            color: #2563eb;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        label {
+            color: #374151;
+            font-weight: 500;
+        }
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1em;
+            margin-top: 4px;
+            background: #f1f5f9;
+            transition: border 0.2s;
+        }
+        input:focus {
+            border: 1.5px solid #2563eb;
+            outline: none;
+        }
+        button {
+            background: linear-gradient(90deg, #4f8cff 0%, #38bdf8 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 0;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #2563eb 0%, #0ea5e9 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .msg {
+            text-align: center;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .msg.error { color: #ef4444; }
+        .back-link, .reg-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover, .reg-link:hover { text-decoration: underline; }
+        @media (max-width: 600px) {
+            .container { padding: 18px 4px; }
+            h2 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Вхід до акаунту</h2>
+        {% if message %}
+            <div class="msg error">{{ message }}</div>
+        {% endif %}
+        <form method="post">
+            <label>Email:
+                <input type="email" name="email" required>
+            </label>
+            <label>Пароль:
+                <input type="password" name="password" required>
+            </label>
+            <button type="submit">Увійти</button>
+        </form>
+        <a class="reg-link" href="/register">Ще не маєте акаунту? Зареєструйтесь</a>
+        <a class="back-link" href="/">На головну</a>
+    </div>
+</body>
+</html> 

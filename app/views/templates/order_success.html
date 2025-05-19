@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Замовлення оформлено</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 420px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 36px 28px 28px 28px;
+            text-align: center;
+        }
+        .icon {
+            font-size: 3em;
+            color: #22c55e;
+            margin-bottom: 12px;
+        }
+        h2 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        .details {
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 18px;
+            margin: 18px 0;
+            text-align: left;
+        }
+        .details strong { color: #2563eb; }
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            background: #e0e7ef;
+            padding: 10px 24px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .back-link:hover { background: #c7d2fe; text-decoration: underline; }
+        @media (max-width: 600px) {
+            .container { padding: 18px 4px; }
+            h2 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">&#10004;</div>
+        <h2>Ваше замовлення оформлено!</h2>
+        <div class="details">
+            <div><strong>Номер замовлення:</strong> {{ order.id }}</div>
+            <div><strong>Товар:</strong> {{ product.name }}</div>
+            <div><strong>Ціна:</strong> {{ product.price }} грн</div>
+            <div><strong>Статус:</strong> {{ order.status }}</div>
+            <div><strong>Ваш email:</strong> {{ user_email }}</div>
+        </div>
+        <a class="back-link" href="/products">Повернутись до товарів</a>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Товари</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 36px 28px 28px 28px;
+        }
+        h2 {
+            color: #2563eb;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .msg {
+            text-align: center;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .msg.success { color: #22c55e; }
+        .msg.error { color: #ef4444; }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .product-card {
+            background: #f1f5f9;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(79,140,255,0.06);
+            padding: 18px 20px;
+            min-width: 180px;
+            max-width: 220px;
+            flex: 1 1 180px;
+            text-align: center;
+        }
+        .product-card h3 {
+            margin: 0 0 8px 0;
+            color: #2563eb;
+            font-size: 1.1em;
+        }
+        .product-card .price {
+            color: #0ea5e9;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+        }
+        label {
+            color: #374151;
+            font-weight: 500;
+        }
+        input[type="email"], select {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1em;
+            background: #f8fafc;
+            margin-top: 4px;
+        }
+        input:focus, select:focus {
+            border: 1.5px solid #2563eb;
+            outline: none;
+        }
+        button {
+            background: linear-gradient(90deg, #4f8cff 0%, #38bdf8 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #2563eb 0%, #0ea5e9 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover { text-decoration: underline; }
+        @media (max-width: 900px) {
+            .products { flex-direction: column; align-items: center; }
+            .product-card { max-width: 100%; min-width: 0; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 18px 4px; }
+            h2 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Список товарів</h2>
+        {% if user_email %}
+            <div style="text-align:right; margin-bottom:10px; color:#2563eb; font-weight:500;">Ви увійшли як: {{ user_email }} | <a href="/logout" style="color:#ef4444; text-decoration:none; font-weight:500;">Вийти</a></div>
+        {% endif %}
+        {% if message %}
+            {% if success %}
+                <div class="msg success">{{ message }}</div>
+            {% else %}
+                <div class="msg error">{{ message }}</div>
+            {% endif %}
+        {% endif %}
+        <div class="products">
+            {% for product in products %}
+                <div class="product-card">
+                    <h3>{{ product.name }}</h3>
+                    <div class="price">{{ product.price }} грн</div>
+                    <div>Тип: {{ product.type }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <form method="post" action="/order">
+            <input type="hidden" name="user_email" value="{{ user_email }}">
+            <label>Оберіть товар:
+                <select name="product_id" required>
+                    {% for product in products %}
+                        <option value="{{ product.id }}">{{ product.name }} ({{ product.price }} грн)</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <button type="submit">Замовити</button>
+        </form>
+        <a class="back-link" href="/">На головну</a>
+    </div>
+</body>
+</html> 
